@@ -4,7 +4,7 @@ A simple react multiple page form with custom styling
 
 ## Demo
 
-[Github Page](https://dev-caspertheghost.github.io/react-multi-form/)
+[Github Pages](https://dev-caspertheghost.github.io/react-multi-form/)
 
 ## What I learned
 
