@@ -25,5 +25,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install Packages
         run: npm install
-      - name: Deploy to GH Pages
-        run: npm run deploy
+      - name: Serve 1
+        run: npm run preserve
+      - name: Serve 2
+        run: npm run serve
