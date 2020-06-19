@@ -29,5 +29,3 @@ jobs:
         run: npm run build
       - name: Serve 1
         run: npm run preserve
-      - name: Serve 2
-        run: npm run serve
