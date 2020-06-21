@@ -13,7 +13,6 @@ export default class MainForm extends Component {
             firstName: "",
             lastName: "",
             username: "",
-            gender: "",
             password: "",
             password2: "",
             agreed: false,
@@ -22,8 +21,16 @@ export default class MainForm extends Component {
     }
 
     next = () => {
-        const { currentIndex, password, password2 } = this.state;
+        const { currentIndex, password, password2, firstName, lastName, username } = this.state;
 
+
+        // if (currentIndex === 0) {
+        //     if ((firstName === "") && (lastName === "") && (username === "")) {
+        //         return this.setState({
+        //             error: "Please fill in all fields."
+        //         })
+        //     }
+        // }
 
         if (currentIndex === 1) {
             // Check if passwords match
@@ -33,6 +40,7 @@ export default class MainForm extends Component {
                 })
             }
         }
+
 
         this.setState({
             currentIndex: this.state.currentIndex + 1,

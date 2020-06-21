@@ -14,7 +14,7 @@ export default class Confirm extends Component {
       <div>
           <div style={{marginBottom: "10px"}}>
             <strong>Full Name: </strong> {`${this.props.values.firstName} ${this.props.values.lastName}`} <br />
-            <strong>Username: </strong> {`${this.props.values.firstName}`} <br />
+            <strong>Username: </strong> {`${this.props.values.username}`} <br />
           </div>
 
         <div className='form-group row'>
