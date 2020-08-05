@@ -1,90 +1,94 @@
-import React, { Component } from 'react'
-import UserDetails from './UserDetails'
-import SetPassword from './SetPassword'
-import Confirm from './Confirm'
+import React, { Component } from "react";
+import UserDetails from "./UserDetails";
+import SetPassword from "./SetPassword";
+import Confirm from "./Confirm";
 
 export default class MainForm extends Component {
+  constructor() {
+    super();
 
-    constructor() {
-        super()
+    this.state = {
+      currentIndex: 0,
+      firstName: "",
+      lastName: "",
+      username: "",
+      password: "",
+      password2: "",
+      agreed: false,
+      error: "",
+    };
+  }
 
-        this.state = {
-            currentIndex: 0,
-            firstName: "",
-            lastName: "",
-            username: "",
-            password: "",
-            password2: "",
-            agreed: false,
-            error: ""
-        }
+  next = () => {
+    const { currentIndex, password, password2 } = this.state;
+
+    if (currentIndex === 1) {
+      // Check if passwords match
+      if (password !== password2) {
+        return this.setState({
+          error: "Password do not match",
+        });
+      }
     }
 
-    next = () => {
-        const { currentIndex, password, password2, firstName, lastName, username } = this.state;
+    this.setState({
+      currentIndex: this.state.currentIndex + 1,
+    });
+  };
 
+  prev = () => {
+    this.setState({
+      currentIndex: this.state.currentIndex - 1,
+    });
+  };
 
-        // if (currentIndex === 0) {
-        //     if ((firstName === "") && (lastName === "") && (username === "")) {
-        //         return this.setState({
-        //             error: "Please fill in all fields."
-        //         })
-        //     }
-        // }
+  onChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
 
-        if (currentIndex === 1) {
-            // Check if passwords match
-            if (password !== password2) {
-                return this.setState({
-                    error: "Password do not match"
-                })
-            }
-        }
+  onChecked = () => {
+    this.setState({
+      agreed: !this.state.agreed,
+    });
+  };
 
+  submit = () => {
+    alert("Submitted!");
+  };
 
-        this.setState({
-            currentIndex: this.state.currentIndex + 1,
-        })
+  render() {
+    const { currentIndex } = this.state;
+    const { firstName, lastName, username, gender, agreed, error } = this.state;
+    const values = { firstName, lastName, username, gender, agreed };
+    switch (currentIndex) {
+      case 0:
+        return (
+          <UserDetails
+            error={error}
+            values={values}
+            onChange={this.onChange}
+            next={this.next}
+            onChecked={this.onChecked}
+          />
+        );
+      case 1:
+        return (
+          <SetPassword
+            error={error}
+            passwords={[this.state.password, this.state.password2]}
+            onChange={this.onChange}
+            next={this.next}
+            prev={this.prev}
+          />
+        );
+      case 2:
+        return (
+          <Confirm values={values} submit={this.submit} prev={this.prev} />
+        );
+      default:
+        return;
     }
-
-    prev = () => {
-        this.setState({
-            currentIndex: this.state.currentIndex - 1,
-        })
-    }
-
-
-    onChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
-
-    onChecked = () => {
-        this.setState({
-            agreed: !this.state.agreed
-        })
-    }
-
-    submit = () => {
-        alert("Submitted!");
-    }
-
-    render() {
-        const { currentIndex } = this.state;
-        const { firstName, lastName, username, gender, agreed, error } = this.state;
-        const values = { firstName, lastName, username, gender, agreed }
-        switch (currentIndex) {
-            case 0: return (
-                <UserDetails error={error} values={values} onChange={this.onChange} next={this.next} onChecked={this.onChecked} />
-            )
-            case 1: return (
-                <SetPassword error={error} passwords={[this.state.password, this.state.password2]} onChange={this.onChange} next={this.next} prev={this.prev} />
-            )
-            case 2: return (
-                <Confirm values={values} submit={this.submit} prev={this.prev} />
-            )
-            default: return
-        }
-    }
+  }
 }
