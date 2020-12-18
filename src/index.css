@@ -43,7 +43,6 @@ body {
   margin-bottom: 10px;
 }
 
-
 .form-group-checkbox label {
   margin-left: 5px;
 }
@@ -81,7 +80,6 @@ body {
   color: white;
   background-color: var(--blue);
 }
-
 
 .error {
   display: flex;

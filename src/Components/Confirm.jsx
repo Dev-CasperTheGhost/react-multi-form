@@ -1,31 +1,21 @@
-import React, { Component } from 'react';
-
-export default class Confirm extends Component {
-  submit = () => {
-    this.props.submit();
-  };
-
-  prev = () => {
-    this.props.prev();
-  };
-
-  render() {
-    return (
-      <div>
-          <div style={{marginBottom: "10px"}}>
-            <strong>Full Name: </strong> {`${this.props.values.firstName} ${this.props.values.lastName}`} <br />
-            <strong>Username: </strong> {`${this.props.values.username}`} <br />
-          </div>
-
-        <div className='form-group row'>
-          <button className='btn' onClick={this.prev}>
-            Previous
-          </button>
-          <button className='btn blue' onClick={this.submit}>
-            Confirm
-          </button>
-        </div>
+function Confirm({ submit, prev, values }) {
+  return (
+    <>
+      <div style={{ marginBottom: "10px" }}>
+        <strong>Full Name: </strong> {`${values.firstName} ${values.lastName}`} <br />
+        <strong>Username: </strong> {`${values.username}`} <br />
       </div>
-    );
-  }
+
+      <div className="form-group row">
+        <button className="btn" onClick={prev}>
+          Previous
+        </button>
+        <button className="btn blue" onClick={submit}>
+          Confirm
+        </button>
+      </div>
+    </>
+  );
 }
+
+export default Confirm;

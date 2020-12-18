@@ -1,76 +1,68 @@
-import React, { Component } from 'react';
-import ErrorMessage from './ErrorMessage';
+import ErrorMessage from "./ErrorMessage";
 
-export default class UserDetails extends Component {
-  onChange = (e) => {
-    this.props.onChange(e);
-  };
-
-  onChecked = (e) => {
-    this.props.onChecked(e);
-  };
-
-  next = () => {
-    this.props.next();
-  };
-
-  render() {
-    return (
-      <div>
-        {this.props.error ? <ErrorMessage error={this.props.error} /> : null}
-        <div className='row'>
-          <div className='form-group'>
-            <label htmlFor='firstName'>First Name</label>
-            <input
-              type='text'
-              name='firstName'
-              className='form-input'
-              id='firstName'
-              onChange={this.onChange}
-              value={this.props.values.firstName}
-              required
-            />
-          </div>
-          <div className='form-group'>
-            <label htmlFor='lastName'>Last Name</label>
-            <input
-              type='text'
-              name='lastName'
-              id='lastName'
-              className='form-input'
-              onChange={this.onChange}
-              value={this.props.values.lastName}
-              required
-            />
-          </div>
-        </div>
-        <div className='form-group'>
-          <label htmlFor='username'>Username</label>
+function UserDetails({
+  next,
+  values,
+  onChanges: { setFirstName, setLastName, setUsername, setAgreed },
+  error,
+}) {
+  return (
+    <>
+      {error ? <ErrorMessage error={error} /> : null}
+      <div className="row">
+        <div className="form-group">
+          <label htmlFor="firstName">First Name</label>
           <input
-            type='text'
-            name='username'
-            id='username'
-            className='form-input'
-            onChange={this.onChange}
-            value={this.props.values.username}
+            type="text"
+            name="firstName"
+            className="form-input"
+            id="firstName"
+            onChange={(e) => setFirstName(e.target.value)}
+            value={values.firstName}
+            required
           />
         </div>
-        <div className='form-group-checkbox'>
+        <div className="form-group">
+          <label htmlFor="lastName">Last Name</label>
           <input
-            name='agreed'
-            id='agreed'
-            type='checkbox'
-            onChange={this.onChecked}
-            checked={this.props.values.agreed}
+            type="text"
+            name="lastName"
+            id="lastName"
+            className="form-input"
+            onChange={(e) => setLastName(e.target.value)}
+            value={values.lastName}
+            required
           />
-          <label htmlFor='agreed'>I agree to the terms and conditions</label>
-        </div>
-        <div className='form-group'>
-          <button className='btn blue' onClick={this.next}>
-            Continue
-          </button>
         </div>
       </div>
-    );
-  }
+      <div className="form-group">
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          className="form-input"
+          onChange={(e) => setUsername(e.target.value)}
+          value={values.username}
+        />
+      </div>
+      <div className="form-group-checkbox">
+        <input
+          name="agreed"
+          id="agreed"
+          type="checkbox"
+          onChange={() => setAgreed((o) => !o)}
+          checked={values.agreed}
+        />
+        <label htmlFor="agreed">I agree to the terms and conditions</label>
+      </div>
+      <div className="form-group">
+        <button className="btn blue" onClick={next}>
+          Continue
+        </button>
+      </div>
+    </>
+  );
 }
+
+export default UserDetails;
